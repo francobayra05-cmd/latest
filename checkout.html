@@ -117,11 +117,11 @@
         <div class="r-div"></div>
         <div id="rtot"></div>
         <div class="r-trust">
-          <span><i></i> 7-day replace or refund</span>
-          <span><i></i> Tested on a real phone</span>
-          <span id="trust-ship"><i></i> Free shipping</span>
-        </div>
-        <div class="r-foot">TapStar • NFC cards for Filipino shops<br>This receipt is a display-only summary. Your order is confirmed after payment verification in Messenger.</div>
+          <span><i>&#10003;</i> 7-day replace or refund</span>
+          <span><i>&#10003;</i> Tested on a real phone</span>
+          <span id="trust-ship"><i>&#10003;</i> Free shipping</span>
+          </div>
+        <div class="r-foot">TapStar &bull; NFC cards for Filipino shops<br>This receipt is a display-only summary. Your order is confirmed after payment verification in Messenger.</div>
       </div>
 
       <div class="dl">
@@ -202,13 +202,13 @@ function render(){
   var ri='';
   ITEMS.forEach(function(it){
     if(Q[it.key]<=0)return;
-    ri+='<div class="ri"><span class="ri-q">'+Q[it.key]+'×</span><span class="ri-n">'+it.p.name+'<em>'+it.v.name+'</em></span><b>'+P(Q[it.key]*it.price)+'</b></div>';
+    ri+='<div class="ri"><span class="ri-q">'+Q[it.key]+'\u00d7</span><span class="ri-n">'+it.p.name+'<em>'+it.v.name+'</em></span><b>'+P(Q[it.key]*it.price)+'</b></div>';
   });
   $('ritems').innerHTML=ri;
 
   var t='<div class="rt"><span>Subtotal</span><b>'+P(c.sub)+'</b></div>';
-  if(c.save>0)t+='<div class="rt g"><span>Pair savings (every 2 cards)</span><b>'+P(c.save)+'</b></div>';
-  if(c.cp>0)t+='<div class="rt g"><span>Coupon '+CFG.coupon.code+'</span><b>'+P(c.cp)+'</b></div>';
+  if(c.save>0)t+='<div class="rt g"><span>Pair savings (every 2 cards)</span><b>\u2212'+P(c.save)+'</b></div>';
+  if(c.cp>0)t+='<div class="rt g"><span>Coupon '+CFG.coupon.code+'</span><b>\u2212'+P(c.cp)+'</b></div>';
   t+='<div class="rt"><span>Shipping</span><b class="free">'+(CFG.freeShip?'FREE':'confirmed in chat')+'</b></div>';
   t+='<div class="rt-band"><span>Total due</span><b>'+P(c.total)+'</b></div>';
   var sv=c.save+c.cp;
@@ -332,41 +332,4 @@ function buildPDF(d){
   T('TOTAL DUE',{s:14,b:true,t2:php(d.total),col:'0.04 0.12 0.29 rg',g:22});
   if(d.saved>0)T('Total savings',{s:10,t2:php(d.saved),col:'0.06 0.62 0.36 rg',g:18});
   R(18);
-  T('How to pay: Send this receipt (screenshot or downloaded copy) to our',{s:9,g:13});
-  T('Messenger. We reply with GCash / Maya / bank payment details. Your order',{s:9,g:13});
-  T('is confirmed after payment verification.',{s:9,g:18});
-  T('TapStar - NFC cards for Filipino shops',{s:9,col:'0.4 g',g:14});
-  var y=792,s='';
-  E.forEach(function(e){
-    if(e.rule){s+='0.6 G 0.5 w 56 '+y+' m 539 '+y+' l S\n';y-=e.g;return;}
-    var f=e.b?'/F2':'/F1';
-    s+='BT '+f+' '+e.s+' Tf '+e.col+' 1 0 0 1 56 '+y+' Tm ('+pdfEsc(e.t)+') Tj ET\n';
-    if(e.t2){var w=e.t2.length*e.s*0.52;s+='BT '+f+' '+e.s+' Tf '+e.col+' 1 0 0 1 '+(539-w).toFixed(1)+' '+y+' Tm ('+pdfEsc(e.t2)+') Tj ET\n';}
-    y-=e.g;
-  });
-  var objs=[null,
-    '<< /Type /Catalog /Pages 2 0 R >>',
-    '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
-    '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>',
-    '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>',
-    '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>',
-    '<< /Length '+s.length+' >>\nstream\n'+s+'endstream'];
-  var pdf='%PDF-1.4\n',offs=[];
-  for(var i=1;i<=6;i++){offs[i]=pdf.length;pdf+=i+' 0 obj\n'+objs[i]+'\nendobj\n';}
-  var xr=pdf.length;
-  pdf+='xref\n0 7\n0000000000 65535 f \n';
-  for(i=1;i<=6;i++){pdf+=('0000000000'+offs[i]).slice(-10)+' 00000 n \n';}
-  pdf+='trailer\n<< /Size 7 /Root 1 0 R >>\nstartxref\n'+xr+'\n%%EOF';
-  return pdf;
-}
-function downloadPDF(){
-  var d=receiptData();
-  saveBlob(new Blob([buildPDF(d)],{type:'application/pdf'}),'TapStar-Receipt-'+d.no+'.pdf');
-}
-$('dlpdf').onclick=downloadPDF;
-$('dlpng').onclick=downloadPNG;
-
-render();
-</script>
-</body>
-</html>
+  T('How to pay: Send this receipt (screenshot or downloaded copy)
