@@ -312,3 +312,8 @@ select{padding:14px;border:1.5px solid var(--line);border-radius:4px;font:1rem '
 .price-right .old {
     font-size: 0.9rem;
 }
+
+/* Easy back-to-home bar on sub-pages */
+.homebar{display:flex;align-items:center;gap:10px;padding:13px 20px;background:var(--soft);border-bottom:1px solid var(--line);font-weight:700;font-size:1.02rem;color:var(--ink);text-decoration:none}
+.homebar:active{background:var(--line)}
+.homebar svg{flex:none}
