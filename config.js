@@ -1,7 +1,7 @@
 /* ===== EDIT THESE. Keep every number and promise TRUE. ===== */
 var CFG={
   page:'TapStarPH',          // Facebook page username for Messenger
-  price:699,                 // price of ONE card (placeholder, set your real price)
+  price:799,                 // price of ONE card (placeholder, set your real price)
   save:299,                  // peso savings for every 2 cards in one order
   freeShip:true,             // only keep true if you really ship free
   coupon:{code:'TAPFIRST',off:50},   // code '' disables it
