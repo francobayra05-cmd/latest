@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Custom design preview | TapStar</title>
+<meta name="description" content="Upload your artwork, position it and preview it on an NFC card before you order.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="w">
+  <nav>
+    <a class="logo" id="logo" href="index.html"><svg width="22" height="22" viewBox="0 0 64 64" fill="none" stroke="#0e0e0e" stroke-width="7" stroke-linecap="round" aria-hidden="true"><path d="M22 20c6 8 6 16 0 24"/><path d="M32 14c9 11 9 25 0 36"/><path d="M42 8c12 14 12 34 0 48"/></svg>TapStar</a>
+    <span class="nr"><a class="o" href="customize.html">Custom design</a><a class="o" id="navc" href="checkout.html">Cart</a></span>
+  </nav>
+</div>
+
+<a class="homebar" href="index.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>Back to home</a>
+
+<main class="w cz">
+  <div class="pvw">
+    <canvas id="cv" class="cv" width="900" height="900" role="img" aria-label="Live preview of your design on the card"></canvas>
+    <label class="gd"><input type="checkbox" id="gd" checked> Show NFC and QR areas</label>
+    <button type="button" class="btn ghost" id="dl" style="width:100%">Download preview image</button>
+    <p class="fine" id="dlm"></p>
+  </div>
+
+  <div class="ctl">
+    <h1>Design your card or standee</h1>
+    <p class="lead">Upload your artwork, position it, and see it on a card or standee before you order. Your image stays on your device. It is not uploaded to our website.</p>
+
+    <div class="panel">
+      <h3>Product</h3>
+      <select id="ver" aria-label="Product"></select>
+      <p class="fine" id="verd"></p>
+    </div>
+
+    <div class="panel">
+      <h3>Upload your design</h3>
+      <label class="drop" id="drop" for="file"><b>Upload design</b><br><span class="fine">Tap to browse, or drop a file here. PNG, JPG or WEBP, up to 10 MB.</span></label>
+      <input type="file" id="file" accept="image/png,image/jpeg,image/webp" hidden>
+      <p class="fine" id="fname">No file chosen.</p>
+      <p class="fine">Square artwork works best. By uploading, you confirm you have permission to use the design.</p>
+    </div>
+
+    <div class="panel">
+      <h3>Fit and position</h3>
+      <p class="fine" style="margin:-6px 0 10px">Drag your design on the preview to move it. Pinch with two fingers (or scroll) to resize it.</p>
+      <div class="seg" id="seg"><button type="button" data-f="fit">Fit</button><button type="button" data-f="fill" class="on">Fill</button></div>
+      <div class="sl"><label for="zm">Zoom</label><span id="zmv">100%</span></div><input type="range" id="zm" min="10" max="500" value="100">
+      <div class="sl"><label for="px">Horizontal position</label><span id="pxv">0%</span></div><input type="range" id="px" min="-100" max="100" value="0">
+      <div class="sl"><label for="py">Vertical position</label><span id="pyv">0%</span></div><input type="range" id="py" min="-100" max="100" value="0">
+      <div class="sl"><label for="rt">Rotation</label><span id="rtv">0 deg</span></div><input type="range" id="rt" min="-180" max="180" value="0">
+      <div class="seg" style="margin-top:10px"><button type="button" id="ctr">Center design</button><button type="button" id="rst">Reset position</button></div>
+    </div>
+
+    <div class="panel">
+      <h3>Where should the NFC open?</h3>
+      <input type="text" id="url" inputmode="url" placeholder="https://..." aria-label="Destination link">
+      <p class="fine">This is the link we will program into your card.</p>
+      <div class="chips" id="chips"></div>
+      <div class="sl" style="margin-top:18px"><label>Quantity</label>
+        <span class="stp"><button type="button" id="qm" aria-label="Fewer">&minus;</button><span id="qv">1</span><button type="button" id="qp" aria-label="More">+</button></span></div>
+      <label for="note" style="display:block;margin:16px 0 6px;font-weight:600">Special instructions</label>
+      <textarea id="note" rows="3" placeholder="Tell us anything we should know about your design or NFC destination."></textarea>
+    </div>
+
+    <div class="panel pbox">
+      <b id="pn">Custom card</b>
+      <div class="pr" id="pt"></div>
+      <p class="fine" id="ps"></p>
+      <p class="fine">We confirm the final price with you in Messenger before you pay.</p>
+    </div>
+
+    <button type="button" class="btn" id="req" style="width:100%">Request this design on Messenger</button>
+    <p class="fine" id="rm" style="min-height:1.4em;font-weight:600"></p>
+    <p class="fine">The website cannot attach files to Messenger. After Messenger opens, attach your artwork and the downloaded preview image in the chat.</p>
+    <button type="button" class="btn ghost" id="all" style="width:100%;margin-top:12px">Reset customization</button>
+  </div>
+</main>
+
+<footer>
+  <div class="w fw"><div class="fb"><b>TapStar</b><p>NFC cards for Filipino shops.<br>One tap opens your page.</p></div><div class="fc"><span class="fh">Contact</span><a href="mailto:tapstarph@gmail.com">tapstarph@gmail.com</a><a href="tel:+639566973618">09566973618</a><a href="https://facebook.com/TapStarPH" target="_blank" rel="noopener">Facebook</a><a id="mm" href="#" target="_blank" rel="noopener">Messenger</a></div><div class="fc"><span class="fh">Shop</span><a href="customize.html">Custom design</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms and Conditions</a></div></div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="config.js"></script>
+<script>
+loadCart();
+var cv=$('cv'),ctx=cv.getContext('2d'),img=null,fit='fill',dest='',qty=1;
+var S={zoom:100,x:0,y:0,rot:0};
+var CH=[
+ ['Google Review','Paste your Google review link'],['Facebook','https://facebook.com/yourpage'],['Instagram','https://instagram.com/yourname'],
+ ['TikTok','https://tiktok.com/@yourname'],['Website','https://yourwebsite.com'],['Menu','Link to your menu'],['Portfolio','Link to your portfolio']
+];
+var ver=$('ver');
+var SGNP=PR.filter(function(p){return p.sign})[0],PRODS=[];
+VER.forEach(function(v){PRODS.push({kind:'card',name:'NFC Card, '+v.name,short:v.name,d:v.d,aspect:v.aspect,price:CFG.price+v.extra})});
+if(SGNP)SGNP.vers.forEach(function(v){var wh={a6:[100,150],a5:[150,210]}[v.id]||[100,150];PRODS.push({kind:'standee',name:'NFC '+v.name,short:v.name,d:v.d,aspect:wh[0]/wh[1],price:SGNP.price+v.extra})});
+PRODS.forEach(function(p){var o=document.createElement('option');o.textContent=p.name+': '+p.d;ver.appendChild(o)});
+
+function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()}
+function dims(mw,mh,a){var w=mw,h=w/a;if(h>mh){h=mh;w=h*a}return {w:w,h:h}}
+function guides(c,x,y,w,h){
+  var m=Math.min(w,h),ac='#1f3dff',two=PRODS[ver.selectedIndex].kind==='card'&&ver.selectedIndex===1;
+  c.save();c.strokeStyle=ac;c.fillStyle=ac;c.textAlign='center';c.font='600 '+Math.round(m*.04)+'px sans-serif';
+  function lab(t,tx,ty){c.save();c.setLineDash([]);c.lineJoin='round';c.lineWidth=Math.max(4,m*.014);c.strokeStyle='#fff';c.strokeText(t,tx,ty);c.fillStyle=ac;c.fillText(t,tx,ty);c.restore()}
+  function nfc(cx,cy,r){
+    c.lineWidth=Math.max(2,m*.006);c.setLineDash([m*.025,m*.02]);c.beginPath();c.arc(cx,cy,r,0,7);c.stroke();
+    c.setLineDash([]);c.lineWidth=Math.max(2,m*.012);c.lineCap='round';
+    for(var i=1;i<=3;i++){c.beginPath();c.arc(cx-r*.55,cy,r*(.28+.2*i),-.75,.75);c.stroke()}
+    lab('NFC tap here',cx,cy+r+m*.06);
+  }
+  if(two){
+    nfc(x+w*.27,y+h*.5,m*.17);
+    var qs=m*.3,qx=x+w*.74-qs/2,qy=y+h*.5-qs/2,k=qs*.24;
+    c.lineWidth=Math.max(2,m*.006);c.setLineDash([m*.025,m*.02]);c.strokeRect(qx,qy,qs,qs);c.setLineDash([]);
+    c.globalAlpha=.7;c.fillRect(qx+qs*.1,qy+qs*.1,k,k);c.fillRect(qx+qs*.9-k,qy+qs*.1,k,k);c.fillRect(qx+qs*.1,qy+qs*.9-k,k,k);c.fillRect(qx+qs*.58,qy+qs*.58,k*.6,k*.6);c.globalAlpha=1;
+    lab('QR code',qx+qs/2,qy+qs+m*.06);
+  }else if(PRODS[ver.selectedIndex].kind==='standee')nfc(x+w/2,y+h*.8,m*.13);else nfc(x+w/2,y+h/2,m*.17);
+  c.restore();
+}
+function card(c,x,y,w,h,o){
+  var r=Math.min(w,h)*.05;
+  if(o.shadow){c.save();c.shadowColor='rgba(0,0,0,.28)';c.shadowBlur=w*.06;c.shadowOffsetY=w*.03;rr(c,x,y,w,h,r);c.fillStyle='#fff';c.fill();c.restore()}
+  c.save();rr(c,x,y,w,h,r);c.clip();c.fillStyle='#fff';c.fillRect(x,y,w,h);
+  if(img){
+    var sc=(fit==='fit'?Math.min(w/img.width,h/img.height):Math.max(w/img.width,h/img.height))*S.zoom/100;
+    c.translate(x+w/2+S.x/100*w,y+h/2+S.y/100*h);c.rotate(S.rot*Math.PI/180);c.scale(sc,sc);c.drawImage(img,-img.width/2,-img.height/2);
+  }else if(o.hint){
+    c.fillStyle='#8a8a84';c.textAlign='center';c.font='600 '+Math.round(w*.045)+'px sans-serif';
+    c.fillText('Upload your design',x+w/2,y+h*.14);c.fillText('to preview it here',x+w/2,y+h*.14+w*.06);
+  }
+  c.restore();
+  if(o.guides)guides(c,x,y,w,h);
+  c.save();rr(c,x,y,w,h,r);c.strokeStyle='rgba(0,0,0,.14)';c.lineWidth=2;c.stroke();c.restore();
+}
+function layout(CW,CH,p,s){
+  var W=CW*s,H=CH*s;
+  if(p.kind==='standee'){var ar=1/p.aspect,w=Math.min(W/1.16,H/(ar+.13)),h=w*ar,top=(CH-(h+.13*w))/2;return {x:(CW-w)/2,y:top+.035*w,w:w,h:h}}
+  var d=dims(W,H,p.aspect);return {x:(CW-d.w)/2,y:(CH-d.h)/2,w:d.w,h:d.h};
+}
+/* acrylic standee: clear frame + base around the printed design */
+function standee(c,x,y,w,h,o){
+  var e=w*.035,bh=w*.09,bx=x-w*.08,bw=w*1.16,by=y+h+e-bh*.4;
+  if(o.shadow){c.save();c.fillStyle='rgba(0,0,0,.22)';c.shadowColor='rgba(0,0,0,.3)';c.shadowBlur=w*.05;c.shadowOffsetY=w*.02;rr(c,bx,by,bw,bh,bh*.3);c.fill();c.restore()}
+  c.save();var g=c.createLinearGradient(x-e,y-e,x+w+e,y+h+e);g.addColorStop(0,'rgba(255,255,255,.9)');g.addColorStop(1,'rgba(205,222,240,.65)');
+  rr(c,x-e,y-e,w+2*e,h+2*e,e*.8);c.fillStyle=g;c.fill();c.lineWidth=Math.max(2,w*.006);c.strokeStyle='rgba(110,135,170,.55)';c.stroke();c.restore();
+  card(c,x,y,w,h,{guides:o.guides,shadow:false,hint:o.hint});
+  c.save();rr(c,x-e,y-e,w+2*e,h+2*e,e*.8);c.clip();var gl=c.createLinearGradient(x-e,y-e,x+w*.7,y+h*.7);gl.addColorStop(0,'rgba(255,255,255,.28)');gl.addColorStop(.35,'rgba(255,255,255,.06)');gl.addColorStop(.36,'rgba(255,255,255,0)');c.fillStyle=gl;c.fillRect(x-e,y-e,w+2*e,h+2*e);c.restore();
+  c.save();var gb=c.createLinearGradient(0,by,0,by+bh);gb.addColorStop(0,'rgba(255,255,255,.95)');gb.addColorStop(1,'rgba(190,208,230,.9)');
+  rr(c,bx,by,bw,bh,bh*.3);c.fillStyle=gb;c.fill();c.lineWidth=Math.max(2,w*.006);c.strokeStyle='rgba(110,135,170,.6)';c.stroke();
+  c.beginPath();c.moveTo(bx+bh*.4,by+bh*.34);c.lineTo(bx+bw-bh*.4,by+bh*.34);c.strokeStyle='rgba(110,135,170,.35)';c.stroke();c.restore();
+}
+function render(){
+  var P0=PRODS[ver.selectedIndex],r0=layout(cv.width,cv.height,P0,.8);
+  cv.style.touchAction=img?'none':'auto';cv.style.cursor=img?'grab':'default';
+  ctx.fillStyle='#f3f3f0';ctx.fillRect(0,0,cv.width,cv.height);
+  (P0.kind==='standee'?standee:card)(ctx,r0.x,r0.y,r0.w,r0.h,{guides:$('gd').checked,shadow:true,hint:true});
+  var v=PRODS[ver.selectedIndex],one=v.price,tot=qty*one-(v.kind==='card'?Math.floor(qty/2)*CFG.save:0);
+  $('verd').textContent=v.d+'.';
+  $('pn').textContent='Custom '+(v.kind==='card'?'card, ':'standee, ')+v.short;
+  $('pt').textContent=P(tot);
+  $('ps').textContent=v.kind==='card'?(qty+' card'+(qty>1?'s':'')+' at '+P(one)+' each'+(qty>=2?', with '+P(Math.floor(qty/2)*CFG.save)+' pair savings':'. Add one more card to save '+P(CFG.save))+'.'):(qty+' standee'+(qty>1?'s':'')+' at '+P(one)+' each. Add 1 card and save '+P(CFG.bundle)+'.');
+  $('qv').textContent=qty;
+  var q=cartQuery();$('navc').href='checkout.html'+q;$('logo').href='index.html'+q;
+  var c=calc();$('navc').textContent='Cart'+(c.q?' ('+c.q+')':'');
+}
+
+/* upload */
+function take(f){
+  if(!f)return;
+  if(!/^image\/(png|jpeg|webp)$/.test(f.type)){$('fname').textContent='Please upload a PNG, JPG or WEBP file.';return}
+  if(f.size>10*1024*1024){$('fname').textContent='That file is over 10 MB. Please choose a smaller one.';return}
+  var u=URL.createObjectURL(f),im=new Image();
+  im.onload=function(){img=im;URL.revokeObjectURL(u);$('fname').textContent='Selected: '+f.name;fname=f.name;render()};
+  im.onerror=function(){$('fname').textContent='We could not open that image. Try another file.'};
+  im.src=u;
+}
+var fname='';
+$('file').onchange=function(){take(this.files[0])};
+var dz=$('drop');
+dz.addEventListener('dragover',function(e){e.preventDefault()});
+dz.addEventListener('drop',function(e){e.preventDefault();take(e.dataTransfer.files[0])});
+
+/* controls */
+function setFit(f){fit=f;[].forEach.call($('seg').children,function(b){b.classList.toggle('on',b.dataset.f===f)});render()}
+[].forEach.call($('seg').children,function(b){b.onclick=function(){setFit(b.dataset.f)}});
+function sl(id,key,vid,suf){$(id).oninput=function(){S[key]=+this.value;$(vid).textContent=this.value+suf;render()}}
+sl('zm','zoom','zmv','%');sl('px','x','pxv','%');sl('py','y','pyv','%');sl('rt','rot','rtv',' deg');
+function pos(){S.x=0;S.y=0;S.rot=0;S.zoom=100;[['zm',100,'zmv','%'],['px',0,'pxv','%'],['py',0,'pyv','%'],['rt',0,'rtv',' deg']].forEach(function(a){$(a[0]).value=a[1];$(a[2]).textContent=a[1]+a[3]});setFit('fill')}
+$('ctr').onclick=function(){S.x=0;S.y=0;$('px').value=0;$('py').value=0;$('pxv').textContent='0%';$('pyv').textContent='0%';render()};
+$('rst').onclick=pos;
+$('gd').onchange=render;ver.onchange=render;
+$('gd').onchange=render;ver.onchange=render;
+
+/* drag to move, pinch to zoom on the preview */
+var ptrs={},pin=null;
+function cardRect(){return layout(cv.width,cv.height,PRODS[ver.selectedIndex],.8)}
+function cvPt(e){var r=cv.getBoundingClientRect(),k=cv.width/r.width;return {x:(e.clientX-r.left)*k,y:(e.clientY-r.top)*k}}
+function r1(n){return Math.round(n*10)/10}
+function lim(n){return Math.max(-100,Math.min(100,n))}
+function syncUI(){
+  $('zm').value=S.zoom;$('zmv').textContent=Math.round(S.zoom)+'%';
+  $('px').value=S.x;$('pxv').textContent=Math.round(S.x)+'%';
+  $('py').value=S.y;$('pyv').textContent=Math.round(S.y)+'%';
+}
+function panBy(dx,dy){var r=cardRect();S.x=lim(r1(S.x+dx/r.w*100));S.y=lim(r1(S.y+dy/r.h*100))}
+function zoomAt(f,mx,my){
+  var r=cardRect(),nz=Math.max(10,Math.min(500,S.zoom*f));f=nz/S.zoom;
+  var px=mx-(r.x+r.w/2),py=my-(r.y+r.h/2),ox=S.x/100*r.w,oy=S.y/100*r.h;
+  ox=px+(ox-px)*f;oy=py+(oy-py)*f;
+  S.zoom=r1(nz);S.x=lim(r1(ox/r.w*100));S.y=lim(r1(oy/r.h*100));
+}
+function pinchState(){
+  var k=Object.keys(ptrs),a=ptrs[k[0]],b=ptrs[k[1]];
+  return {d:Math.max(1,Math.hypot(a.x-b.x,a.y-b.y)),mx:(a.x+b.x)/2,my:(a.y+b.y)/2};
+}
+cv.addEventListener('pointerdown',function(e){
+  if(!img)return;
+  ptrs[e.pointerId]=cvPt(e);
+  cv.setPointerCapture(e.pointerId);
+  cv.style.cursor='grabbing';
+  pin=Object.keys(ptrs).length>=2?pinchState():null;
+  e.preventDefault();
+});
+cv.addEventListener('pointermove',function(e){
+  var o=ptrs[e.pointerId];
+  if(!o)return;
+  var p=cvPt(e);ptrs[e.pointerId]=p;
+  if(Object.keys(ptrs).length>=2){
+    var n=pinchState();
+    if(pin){panBy(n.mx-pin.mx,n.my-pin.my);zoomAt(n.d/pin.d,n.mx,n.my)}
+    pin=n;
+  }else{panBy(p.x-o.x,p.y-o.y)}
+  syncUI();render();
+});
+function endDrag(e){
+  if(!ptrs[e.pointerId])return;
+  delete ptrs[e.pointerId];pin=null;
+  if(Object.keys(ptrs).length===0)cv.style.cursor=img?'grab':'default';
+}
+cv.addEventListener('pointerup',endDrag);
+cv.addEventListener('pointercancel',endDrag);
+cv.addEventListener('wheel',function(e){
+  if(!img)return;
+  e.preventDefault();
+  var p=cvPt(e);zoomAt(Math.exp(-e.deltaY*(e.ctrlKey?.01:.0015)),p.x,p.y);
+  syncUI();render();
+},{passive:false});
+$('qp').onclick=function(){qty=Math.min(99,qty+1);render()};
+
+/* destination chips */
+CH.forEach(function(c){
+  var b=document.createElement('button');b.type='button';b.textContent=c[0];
+  b.onclick=function(){dest=c[0];$('url').placeholder=c[1];[].forEach.call($('chips').children,function(x){x.classList.toggle('on',x===b)})};
+  $('chips').appendChild(b);
+});
+
+/* download preview */
+$('dl').onclick=function(){
+  if(!img){$('dlm').textContent='Upload a design first, then download the preview.';return}
+  $('dlm').textContent='';
+  var pr=PRODS[ver.selectedIndex],c=document.createElement('canvas'),g=c.getContext('2d');
+  if(pr.kind==='standee'){c.width=1200;c.height=Math.round(1200/1.16*(1/pr.aspect+.13));g.fillStyle='#fff';g.fillRect(0,0,c.width,c.height);var q=layout(c.width,c.height,pr,1);standee(g,q.x,q.y,q.w,q.h,{guides:false,shadow:false,hint:false})}
+  else{var d=dims(1200,1200,pr.aspect);c.width=Math.round(d.w);c.height=Math.round(d.h);card(g,0,0,c.width,c.height,{guides:false,shadow:false,hint:false})}
+  c.toBlob(function(b){var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='design-preview.png';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},3000)},'image/png');
+};
+
+/* request on messenger */
+$('mm').href='https://m.me/'+CFG.page;
+$('req').onclick=function(){
+  var u=$('url').value.trim();
+  if(!/^https?:\/\/[^\s.\/]+\.[^\s]{2,}$/i.test(u)){$('rm').textContent='Add a valid destination link that starts with https:// before requesting this design.';$('url').focus();return}
+  $('rm').textContent='';
+  var v=PRODS[ver.selectedIndex],one=v.price,tot=qty*one-(v.kind==='card'?Math.floor(qty/2)*CFG.save:0);
+  var t='CUSTOM DESIGN REQUEST\nProduct: '+(v.kind==='card'?'NFC Card ':'Standee ')+v.short+' ('+v.d+')\nOpens: '+(dest?dest+' ':'')+u+'\nQuantity: '+qty+'\nArtwork file: '+(fname||'not chosen yet')+'\nPlacement: '+(fit==='fit'?'Fit':'Fill')+', zoom '+S.zoom+'%, horizontal '+S.x+'%, vertical '+S.y+'%, rotation '+S.rot+' deg\nNotes: '+($('note').value.trim()||'none')+'\nEstimated total: '+P(tot)+'\nI will attach my artwork and the preview image in this chat.';
+  window.open('https://www.facebook.com/FrancoCabadsan'+CFG.page+'?text='+encodeURIComponent(t),'_blank');
+};
+$('all').onclick=function(){
+  img=null;fname='';$('file').value='';$('fname').textContent='No file chosen.';$('url').value='';$('note').value='';qty=1;dest='';$('rm').textContent='';$('dlm').textContent='';
+  [].forEach.call($('chips').children,function(x){x.classList.remove('on')});$('url').placeholder='https://...';ver.selectedIndex=0;pos();
+};
+render();
+</script>
+</body>
+</html>
